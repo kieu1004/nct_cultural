@@ -1,0 +1,598 @@
+/* Reset CSS */
+*{
+    /* Emmet 
+    - padding: p+Tab
+    - margin: m+Tab
+    */
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/*  1. Vị trí
+    2. Kích thước(width, height)
+    3. Màu sắc
+    4. Kiểu dáng (kiểu chữ, hình tròn, vuông,...)*/
+
+html{
+    font-family: Arial, Helvetica, sans-serif;
+    /* Hành vi cuộn */
+    scroll-behavior: smooth;
+}
+
+.clear {
+    clear: both;
+}
+
+.text-black {
+    color:black !important;
+}
+
+.mt-8 {
+    margin-top: 8px !important;
+}
+.mt-16 {
+    margin-top: 16px !important;
+}
+
+.row {
+    margin-left: -8px;
+    margin-right: -8px;
+}
+.row::after {
+    /* clear-after
+       clear-before */
+    content: "";
+    display: block;
+    clear: both;
+}
+.col {
+    float: left; 
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.col-full {
+    width: 100%;
+}
+.col-haft {
+    width: calc(100% /2);
+}
+.col-five {
+    width: calc(100% / 5);
+}
+
+#main {
+    /* overflow: hidden */
+    overflow: hidden;
+}
+
+/* BEGIN HEADER */
+#header {
+    /* Tạo màu nền cho header
+    cố định header
+    z-index: header nổi lên theo trục z (Oxyz)*/
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    position: fixed; 
+    height: 46px;
+    background-color: rgb(22, 204, 22);
+    z-index: 1;
+    /* ẩn các phần từ con, áp dụng với mobile*/
+    /* overflow: hidden; */
+}
+#nav {
+    display: inline-block;
+}
+#nav, .subnav {
+    /* Ẩn dấu chấm list ở đầu */
+    list-style: none;
+}
+#nav > li {
+    /* Ảnh hưởng đến thẻ li trực tiếp là con của thẻ nav
+    inline: Chữ nằm trên một dòng
+    block: Giữ nguyên tính chất khối để đặt được kích thước*/
+    display: inline-block;
+}
+#nav li {
+    /* Ảnh hưởng đến tất cả thẻ li là con của thẻ nav
+    position: relative (lấy chính nó làm gốc tọa độ) - thường thấy ở thẻ parent*/
+    position: relative;
+}
+#nav > li > a {
+    /* Tạo màu chữ, in hoa cho a là con trực tiếp của li
+    và li là con trực tiếp của nav.
+    Định nghĩa: > là con trực tiếp
+ nav > li > a - chỉ ảnh hưởng thẻ a cấp 1 (Home,Band,...More)*/
+    color: rgb(0, 0, 0);
+    font-size: 12px;
+    font-weight:bold;
+    text-transform: uppercase;
+}
+#nav li a {
+/* Ảnh hưởng đến tất cả chữ a là con của li, li là con của nav
+    color: Đổi màu chữ
+    text-decoration: Gạch chân của chữ
+    line-height: Chiều cao của chữ - cùng height(header)
+    padding: Đệm thêm vào đối tượng */   
+    text-decoration: none;
+    line-height: 46px; 
+    padding: 0 24px;
+    display: inline-block;
+}
+#nav li:hover .subnav {
+    /* Hiệu ứng di chuột sáng sẽ được áp dụng (subnav)
+    Mechandise, Extras, Media*/
+    display: block;
+}
+#nav > li:hover > a,
+#nav .subnav li:hover a{  
+    /* Hiệu ứng khi di chuột sẽ được áp dụng (a)
+   Ảnh hưởng đến màu, background chữ.
+    - nav > li:hover > a: chỉ ảnh hưởng thẻ a cấp 1 (Home,Band,...More)
+    chỉ hover sáng cấp 1 khi di chuột
+    - nav .subnav li:hover a: ảnh hưởng đến tất cả thẻ a cấp 2 (Mechandise,...)*/
+    color: rgb(1, 99, 1) ;
+    background-color: rgb(238, 238, 213);
+}
+#nav li:hover a {
+    /* Hiệu ứng khi di chuột sẽ được áp dụng (a)
+       nên hover vào thẻ cấp cao nhất (ở đây là thẻ li)
+       Vd: Khi di chuột vào các thẻ (Merchandise, Extras, Media) thì thẻ More vẫn sáng
+       
+       trong thẻ a: display: line (kích thước mặc định auto), không xét được kích thước
+       khi ta thêm inline-block thì thẻ a sẽ có kích thước
+       theo line-height = 46px */
+    display: block;
+}
+/* Cấp 1:*/
+#nav .subnav {
+     /*positon: absolute (lấy thuộc tính position ở thẻ parent gần nhất
+    để làm gốc tọa độ - thường thấy ở thẻ con
+    box-shadow: Tạo bóng đổ x,y,blur,màu*/
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 160px; 
+    background-color: rgb(253, 253, 253);
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+/* Cấp 2:*/
+#nav .subnav a {
+    color: rgb(0, 0, 0);
+    padding: 0 12px;
+    line-height: 38px;
+    font-size: 12px;
+}
+#nav .nav-arrow-down {
+    /* Tạo mũi tên sau More */
+    font-size: 10px;
+}
+#header .mobile-menu-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+}
+header .mobile-menu-btn,
+#header .search-btn {
+    /* Thẻ div thêm float sẽ mất tính kế thừa chiều ngang */
+    float: right;
+    padding: 0 21px;
+}
+#mobile-menu {
+    padding: 13px;
+}
+#header .search-icon {
+    color: white;
+    font-size: 20px;
+    line-height: 46px;
+}
+#header .search-btn:hover {
+    cursor: pointer;
+    color: white;
+    background-color: rgb(68, 180, 68);
+}
+#header .mobile-menu-btn:hover .mobile-menu-icon {
+    color: black;
+}
+/* END HEADER */
+
+/* BEGIN SLIDER */
+/* url(): background img
+   top center: background position
+   / cover: background size
+   no repeat: background repeat*/
+
+/* Ảnh nền: chỉ hiển thị trong phần Padding
+            đảm bảo được kích thước chiều cao của ảnh
+            luôn bằng 50% kích thước chiểu rộng của chính nó*/
+#slider {
+/*margin-top: 46px (slider hiện dưới header)
+  padding-top: 50% (50% chiều ngang của chính nó*/
+    position: relative;
+    margin-top: 46px;
+    padding-top: 50%;
+    background: url('/assets/img/slider/slider-nctdemo.jpg') top center / cover no-repeat;
+}
+#slider .text-content {
+    /* text-content khi để position: absolute
+    -> được nhấc cao lên một layer so với ảnh
+    -> không chiếm được phần text-content nữa*/
+    position: absolute;
+    bottom: 10px;
+    /* Cách 1: Căn giữa*/
+    width: 100%;
+    /* Cách 2:
+    left: 50%;
+    transform: translateX(-50%);
+       Cách 3:
+    right: 0;
+    left: 0; */
+    text-align: center;
+    color: white;
+    text-shadow: 0 0 1px black;
+}
+#slider .text-heading {
+    font-size: 50px;
+    letter-spacing: 4px;
+}
+#slider .text-description {
+    font-size: 15px;
+    margin-top: 2px;
+}
+/* END SLIDER */
+
+/* BEGIN CONTENT */
+#content {
+
+}
+#content .content-section {
+    width: 800px;
+    max-width: 100%;
+    padding: 80px 0 112px;
+    /* Căn giữa chữ */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+#content .section-heading {
+    font-size: 30px;
+    text-align: center;
+    /* Khoảng cách giữa các chữ */
+    letter-spacing: 4px; 
+}
+#content .section-sub-heading {
+    font-size: 15px;
+    text-align: center;
+    margin-top: 10px;
+    font-style: italic;
+    /* opacity: độ mờ của chữ */
+    opacity: 0.6;
+}
+#content .about-text {
+    margin-top: 15px;
+    /* justify: căn đều hai bên của chữ */
+    text-align: justify;
+    line-height: 1.4;
+}
+#content .members-list-1,
+#content .members-list-2 {
+    /* overflow:hidden; thẻ parent (memberslist) chứa cả thẻ con (membername,memberavatar)*/
+    margin-top: 48px;
+    overflow: hidden;
+}
+#content .members-list-1 .member-item,
+#content .members-list-2 .member-item {
+    float: left;
+    width: calc(100% / 5);
+    text-align: center;
+    /* width: 33.33333%; */
+}
+#content .member-name {
+    margin-top: 10px;
+    font-size: 15px;
+    text-transform: uppercase;
+    font-style: italic;
+}
+#content .member-avatar {
+    margin-top: 10px;
+    width: 135px;
+    border-radius: 4px;
+}
+
+.album-section {
+    background-color: rgb(117, 228, 117);
+}
+.album-list {
+    background-color: white;
+    list-style: none;
+    margin-top: 30px;
+}
+.album-list li {
+    color: #757575;
+    font-size: 15px;
+    padding: 11px 30px;
+    border-bottom: 1px solid rgb(118, 141, 118);
+}
+.album-list .sold-out {
+    background-color: #f44336;
+    color: #fff;
+    padding: 3px 4px;
+    margin-left: 16px;
+}
+.album-list .quantity {
+    /* inline + float = block */
+    float: right;
+    width: 24px;
+    height: 24px;
+    background-color: green;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    /* line-height = height */
+    line-height: 24px;
+    /* margin-top (-) <-> float */
+    margin-top: -3px;
+}
+
+.versions-list {
+    /*margin-top: 32px;
+    //căn hình ảnh đều hai bên//
+    margin-left: -8px;
+    margin-right: -8px;*/
+    margin: 32px -8px 0;
+    overflow: hidden;
+
+}
+.version-item {
+    /* Đưa hình nằm ngang: float(left) + width*/
+    float: left;
+    width: calc(100% / 4);
+    padding: 0 8px;
+}
+.version-img {
+    /* Ảnh không tự thu nhỏ theo thẻ parent
+    Ảnh lớn hơn thẻ chứa nó
+    width: 100%  => bằng kích thước của thẻ chứa ảnh */
+    width: 100%;
+    display: block;
+}
+.version-img:hover {
+    opacity: 0.8;
+}
+.version-detail {
+    background-color: white;
+    padding: 16px;
+    font-size: 15px;
+
+}
+.version-heading {
+    font-size: 15px;
+    font-weight: 600;
+
+}
+.version-sub-heading {
+    margin-top: 15px;
+    color: #757575;
+}
+.version-desc {
+    margin-top: 15px;
+    line-height: 1.4;
+}
+.version-buy-btn {
+    color: green;
+    background-color:rgb(236, 226, 226);
+    font-style: inherit;
+    text-decoration: none;
+    padding: 11px 16px;
+    display: inline-block;
+    margin-top: 15px;
+    appearance: none;
+    -webkit-appearance: none;
+}
+.version-buy-btn:hover {
+    color: black;
+    background-color: rgb(238, 238, 213);
+    cursor: pointer;
+}
+
+/* BEGIN DETAIL ALBUM */
+.album-detail-section {
+    background-color: rgb(117, 228, 117);
+}
+.content-album-detail-section {
+    font-size: 20px;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 100px;
+}
+.album-detail-section-heading {
+    padding: 15px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+.album-detail-list {
+    overflow: hidden;
+}
+.album-detail-item {
+    float: left;
+    width: calc(100% / 4);
+    padding: 0 8px;
+    text-align: center;
+}
+.version-heading {
+    padding: 10px;
+}
+.album-detail-img {
+    width: 100%;
+    display: block;
+}
+/* END DETAIL ALBUM */
+
+.contact-content {
+    margin-top: 48px;
+    padding: 30px;
+}
+.contact-infor {
+    font-size: 16px;
+    line-height: 1.5px;
+}
+.contact-infor i[class*="ti-"] {
+    width: 30px;
+    display: inline-block;
+}
+
+.contact-form {
+    font-size: 15px;
+    float: right;
+}
+.contact-form .form-control {
+    padding: 8px;
+    border: 1px solid #ccc;
+    width: 100%;
+    outline: none;
+}
+.contact-form .form-submit {
+    background-color:rgb(236, 226, 226);
+    color: green;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    float: right;
+}
+.form-submit:hover{
+    color: black;
+    background-color: rgb(238, 238, 213);
+    cursor: pointer;
+}
+
+.below-section img {
+    width: 100%;
+}
+/* END CONTENT */
+
+/* BEGIN FOOTER */
+#footer {
+    padding: 100px 16px;
+    text-align: center;
+}
+#footer .social-list {
+    font-size: 20px;
+}
+#footer .social-list a {
+    color: rgba(0, 0, 0, 0.6);
+    text-decoration: none;
+}
+#footer .copyright a:hover,
+#footer .social-list a:hover{
+    color: rgba(0, 0, 0, 0.4);
+}
+#footer .copyright {
+    margin-top: 15px;
+    color: rgba(0, 0, 0, 0.6);
+}
+#footer .copyright a {
+    color: rgba(0, 0, 0, 0.6);
+}
+/* END FOOTER */
+
+/* BEGIN MODAL */
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    /* thẻ con nằm giữa chiều cao của parent */
+    align-items: center;
+    /* thẻ con nằm giữa chiều ngang của parent */
+    justify-content: center;
+    display: none;
+}
+.modal-open {
+    /* flex box */
+    display: flex;
+}
+.modal-container {
+    background: white;
+    width: 900px;
+    max-width: calc(100% - 32px);
+    min-height: 200px;
+    position: relative;
+    animation: modalFadeIn case 0.9s;
+}
+.modal-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: white;
+    padding: 12px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+.modal-close:hover {
+    opacity: 1;
+}
+.modal-header {
+    background: rgb(52, 116, 52);
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    color: white;
+}
+.modal-heading-icon {
+    margin-right: 16px;
+}
+.modal-body {
+    padding: 16px;
+}
+.modal-label {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+.modal-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+    margin-bottom: 25px;
+    font-size: 15px;
+}
+#buy-albums {
+    background: rgb(89, 173, 89);
+    border: none;
+    color: white;
+    width: 100%;
+    font-size: 15px;
+    text-transform: uppercase;
+    padding: 15px;
+}
+#buy-albums:hover {
+    opacity: 0.9;
+    cursor: pointer;
+}
+.modal-footer {
+    padding: 16px;
+    text-align: right;
+}
+.modal-footer a{
+    color: teal;
+}
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-150px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* END MODAL */
+
